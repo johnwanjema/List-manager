@@ -47,7 +47,6 @@ async function WriteList() {
 /* Listener Functions */
 async function httpPost(e) {
   e.preventDefault();
-  console.log(input.value);
   theList.push(input.value);
   WriteList();
   ShowList();
@@ -55,7 +54,14 @@ async function httpPost(e) {
 
 function httpDelete(e) {
   e.preventDefault();
-
+  index = theList.indexOf(input.value);
+  if(index != -1){
+      theList.splice(index,1)
+  }else{
+    alert('element not found')
+  }
+  WriteList();
+  ShowList();
   
 }
 

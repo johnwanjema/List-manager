@@ -16,7 +16,6 @@ app.get("/api", async (req,res) => {
 })
 
 app.post("/api", async (req,res) => {
-  console.log(req.body)
   res.send(await fm.WriteData(req.body));
 })
 
