@@ -12,12 +12,12 @@ app.use(express.json());
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
-  res.send(await fm.ReadData());
+  res.send(await fm.ReadData(req));
 })
 
 app.post("/api", async (req,res) => {
-  console.log('post');
-  // res.send(await fm.WriteData(req));
+  console.log(req.body)
+  res.send(await fm.WriteData(req.body));
 })
 
 // page not found route

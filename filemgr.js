@@ -11,11 +11,13 @@ async function ReadData() {
  
 async function WriteData(dataOut) {
   try {
-    console.log(dataOut)
-    await fs.writeFile('listdata.json', dataOut, 'utf8');
+    const jsonStr = JSON.stringify(dataOut);
+    await fs.writeFile('listdata.json', jsonStr, 'utf8');
     console.log('File written successfully');
+    return true;
   } catch (err) {
-    console.error('Error writing to file:', err);
+    console.error('Error writing to file:', error);
+    throw error;
   }
 }
  

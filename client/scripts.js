@@ -35,13 +35,7 @@ async function GetList() {
 }
 
 async function WriteList() {
-
-}
-
-/* Listener Functions */
-async function httpPost(e) {
-  // console.log(input.value)
-  http.post('/api',{1 : 'item'})
+  http.post('/api',theList)
     .then( (response)=> {
       console.log(response)
     })
@@ -50,7 +44,17 @@ async function httpPost(e) {
     });
 }
 
+/* Listener Functions */
+async function httpPost(e) {
+  e.preventDefault();
+  console.log(input.value);
+  theList.push(input.value);
+  WriteList();
+  ShowList();
+}
+
 function httpDelete(e) {
+  e.preventDefault();
 
   
 }
