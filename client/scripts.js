@@ -24,7 +24,14 @@ function ShowList() {
 }
 
 async function GetList() {
-
+    http.get('/api')
+    .then( (response)=> {
+      theList = response;
+      ShowList();
+    })
+    .catch((error) => {
+      console.log(error)
+    });
 }
 
 async function WriteList() {
@@ -33,8 +40,14 @@ async function WriteList() {
 
 /* Listener Functions */
 async function httpPost(e) {
-
-  
+  // console.log(input.value)
+  http.post('/api',{1 : 'item'})
+    .then( (response)=> {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    });
 }
 
 function httpDelete(e) {

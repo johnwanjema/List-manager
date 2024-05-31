@@ -12,11 +12,12 @@ app.use(express.json());
 
 // Define HTTP routes listenting for requests
 app.get("/api", async (req,res) => {
-  
+  res.send(await fm.ReadData());
 })
 
 app.post("/api", async (req,res) => {
-
+  console.log('post');
+  // res.send(await fm.WriteData(req));
 })
 
 // page not found route
@@ -25,7 +26,7 @@ app.all("*", (req,res) => {
 });
 
 
-fm.ReadData();
+
 
 // Create a server
 const appName = "Simple List";
