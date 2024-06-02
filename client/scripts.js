@@ -50,6 +50,7 @@ async function httpPost(e) {
   theList.push(input.value);
   WriteList();
   ShowList();
+  input.value = "";
 }
 
 function httpDelete(e) {
@@ -62,7 +63,7 @@ function httpDelete(e) {
   }
   WriteList();
   ShowList();
-  
+  input.value = ""
 }
 
 // Loading functions
