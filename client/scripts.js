@@ -37,7 +37,7 @@ async function GetList() {
 async function WriteList() {
   http.post('/api',theList)
     .then( (response)=> {
-      console.log(response)
+      // console.log(response)
     })
     .catch((error) => {
       console.log(error)
@@ -46,6 +46,7 @@ async function WriteList() {
 
 /* Listener Functions */
 async function httpPost(e) {
+  showLoading();
   e.preventDefault();
   theList.push(input.value);
   WriteList();
@@ -54,6 +55,7 @@ async function httpPost(e) {
 }
 
 function httpDelete(e) {
+  showLoading();
   e.preventDefault();
   index = theList.indexOf(input.value);
   if(index != -1){

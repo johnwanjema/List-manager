@@ -23,7 +23,6 @@ class coreHTTP {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(requestData)};
     const response = await fetch(url, reqOptions);
-    console.log(response);
     if (response.ok) {
       const responseData = await response.json();
       return responseData;
