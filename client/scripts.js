@@ -13,11 +13,16 @@ const addButton =  document.querySelector(".add-btn");
 addButton.addEventListener("click", httpPost);
 // delButton.addEventListener("click", httpDelete);
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 /* Helper Functions */
 function ShowList() {
   let output = "<ul>";
   theList.forEach((item, index) => {
-    output += `<li>${item} <button class="del-item-btn" data-index="${index}" style="font-size: 12px; padding: 2px 5px;">Delete</button></li>`;
+    const capitalizedItem = capitalizeFirstLetter(item);
+    output += `<li>${capitalizedItem} <button class="del-item-btn small-button" data-index="${index}">Delete</button></li>`;
   });
   output += "</ul>";
   result.innerHTML = output;
