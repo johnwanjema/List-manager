@@ -59,6 +59,14 @@ async function WriteList() {
 async function httpPost(e) {
   showLoading();
   e.preventDefault();
+  
+  // Validation for blank input
+  if (!input.value.trim()) {
+    alert("Input cannot be blank!");
+    ShowList();
+    return;
+  }
+
   theList.push(input.value);
   WriteList();
   ShowList();
@@ -66,11 +74,15 @@ async function httpPost(e) {
 }
 
 function httpDelete(e) {
-  console.log(e.target.getAttribute("data-index"))
-  // const index = ;
   showLoading();
   e.preventDefault();
   index = e.target.getAttribute("data-index");
+
+  // Confirmation for delete
+  if (!confirm("Are you sure you want to delete this item?")) {
+    return; // Exit if user cancels the delete action
+  }
+
   if(index != -1){
       theList.splice(index,1)
   }else{
