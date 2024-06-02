@@ -13,7 +13,6 @@ async function WriteData(dataOut) {
   try {
     const jsonStr = JSON.stringify(dataOut);
     await fs.writeFile('listdata.json', jsonStr, 'utf8');
-    console.log('File written successfully');
     return true;
   } catch (err) {
     console.error('Error writing to file:', error);
