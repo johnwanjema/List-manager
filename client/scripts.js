@@ -7,20 +7,26 @@ let theList = [];
 const result = document.querySelector(".result");
 const input =  document.querySelector("#listitem");
 const addButton =  document.querySelector(".add-btn");
-const delButton =  document.querySelector(".del-btn");
+// const delButton =  document.querySelector(".del-btn");
 
 // Listeners
 addButton.addEventListener("click", httpPost);
-delButton.addEventListener("click", httpDelete);
+// delButton.addEventListener("click", httpDelete);
 
 /* Helper Functions */
 function ShowList() {
   let output = "<ul>";
-  for (const itm of theList) {
-    output += `<li>${itm}</li>`;
-  }
+  theList.forEach((item, index) => {
+    output += `<li>${item} <button class="del-item-btn" data-index="${index}" style="font-size: 12px; padding: 2px 5px;">Delete</button></li>`;
+  });
   output += "</ul>";
   result.innerHTML = output;
+
+  // Add event listeners for the delete buttons
+  const deleteButtons = document.querySelectorAll(".del-item-btn");
+  deleteButtons.forEach(button => {
+    button.addEventListener("click", httpDelete);
+  });
 }
 
 async function GetList() {
@@ -55,9 +61,11 @@ async function httpPost(e) {
 }
 
 function httpDelete(e) {
+  console.log(e.target.getAttribute("data-index"))
+  // const index = ;
   showLoading();
   e.preventDefault();
-  index = theList.indexOf(input.value);
+  index = e.target.getAttribute("data-index");
   if(index != -1){
       theList.splice(index,1)
   }else{
@@ -75,13 +83,13 @@ function showLoading() {
 
 async function main() {
   addButton.disabled = true;
-  delButton.disabled = true;
+  // delButton.disabled = true;
   showLoading();
 
   await GetList();
 
   addButton.disabled = false;
-  delButton.disabled = false;
+  // delButton.disabled = false;
 }
 
 main();
