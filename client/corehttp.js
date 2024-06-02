@@ -1,60 +1,48 @@
 // Constructor to create an XHR object
 class coreHTTP {
-
-  /* <<< HTTP GET request >>> */
   async get(url) {
-    const requestOptions = {
-      method: "GET",
-      headers: {"Content-Type": "application/json"}
-    };
-    const response = await fetch(url, requestOptions);
-    if (response.ok) {
-      const responseData = await response.json();
-      return (responseData);
-    } else {
-      return (Promise.reject(response.status));
-    }
+    return await this.request('GET', url);
   }
-  
-  /* <<< HTTP POST request >>> */
-  async post(url, requestData) {
-    const reqOptions = {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(requestData)};
-    const response = await fetch(url, reqOptions);
-    if (response.ok) {
-      const responseData = await response.json();
-      return responseData;
-    } else {
-      return (Promise.reject(response.status));
-    }
+
+  async post(url, data) {
+    return await this.request('POST', url, data);
   }
-  
-  /* <<< HTTP PUT request >>> */
-  async put(url, requestData) {
-    const reqOptions = {
-      method: "PUT",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify(requestData)};
-    const response = await fetch(url, reqOptions);
-    if (response.ok) {
-      const responseData = await response.json();
-      return (responseData);
-    } else {
-      return (Promise.reject(response.status));
-    }
+
+  async put(url, data) {
+     return await this.request('PUT', url, data);
   }
 
   async delete(url) {
-    const reqOptions = {
-      method: "DELETE",
-      headers: {"Content-Type": "application/json"}};
-      const response = await fetch(url, reqOptions);
-      if (response.ok) {
-        return ({});
-      } else {
-        return (Promise.reject(response.status));
-      }
+    return await this.request('DELETE', url);
   }
+
+  async patch(url, data) {
+    return await this.request('PATCH', url, data);
+ }
+
+  request(method, url, data = null) {
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: method,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: data ? JSON.stringify(data) : null
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        resolve(data);
+      })
+      .catch(error => {
+        console.log(error);
+        reject(error);
+      });
+    });
+  }
+
 }
